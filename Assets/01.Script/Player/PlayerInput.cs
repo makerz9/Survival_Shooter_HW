@@ -33,6 +33,6 @@ public class PlayerInput : MonoBehaviour
         MoveX = Input.GetAxis(MoveAxisX);
         MoveY = Input.GetAxis(MoveAxisY);
         Fire = Input.GetButton(FireAxis);
-        Fire = Input.GetButtonDown(FireAxis);
+        Reload = Input.GetButtonDown(ReloadAxis);
     }
 }
