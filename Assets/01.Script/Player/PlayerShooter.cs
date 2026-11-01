@@ -5,6 +5,7 @@ public class PlayerShooter : MonoBehaviour
     public static readonly int IdReload = Animator.StringToHash("Reload");
 
     public GunNormal gun;
+    public GunShotGun shotgun;
 
     public Transform gunPivot;
 

@@ -13,7 +13,7 @@ public class PlayerHealth : LivingEntity
     public Renderer playerRenderer;
     public AudioClip hitClip;
     public AudioClip deathClip;
-    public Image uiPlayerHealth;
+
     public AudioSource playerAudioSource;
 
     //맞다 다른 컴포넌트 끄자
@@ -22,6 +22,9 @@ public class PlayerHealth : LivingEntity
     private Animator playerAnimator;
     private PlayerInput playerInput;
     private LookAtMouse lookAtMouse;
+
+    public UIManager uiManager;
+    public Image imagePlayerHP;
 
     //재장전엔 그냥 모션 넣지 말죠
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -43,8 +46,8 @@ public class PlayerHealth : LivingEntity
         playerController.enabled = true;
         playerInput.enabled = true;
 
-        uiPlayerHealth.gameObject.SetActive(true);
-        uiPlayerHealth.fillAmount = Health / startingHealth;
+        imagePlayerHP.fillAmount = Health / startingHealth;
+        uiManager.SetHpText(Health, startingHealth);
     }
 
     // Update is called once per frame
@@ -64,12 +67,14 @@ public class PlayerHealth : LivingEntity
         }
         base.OnDamage(damage, hitPoint, hitNormal);
 
-        uiPlayerHealth.fillAmount = Health / startingHealth;
+        
         playerAudioSource.PlayOneShot(hitClip);
         hitEffect.transform.position = hitPoint;
         hitEffect.transform.forward = hitNormal;
         hitEffect.Play();
 
+        imagePlayerHP.fillAmount = Health / startingHealth;
+        uiManager.SetHpText(Health, startingHealth);
     }
 
     public override void Die()
@@ -80,6 +85,6 @@ public class PlayerHealth : LivingEntity
         playerShooter.enabled = false;
         lookAtMouse.enabled = false;
         playerAnimator.SetTrigger("isDead");
-
+        uiManager.SetActiveGameOverUI(true);
     }
 }

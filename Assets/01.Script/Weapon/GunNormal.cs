@@ -43,7 +43,7 @@ public class GunNormal : MonoBehaviour
     {
         remainAmmo = gunData.startAmmoRemain;
         currentAmmo = gunData.magCapacity;
-        //uiManager.SetAmmoText(magAmmo, ammoRemain);
+        uiManager.SetAmmoText(currentAmmo, remainAmmo);
 
         CurrentState = State.Ready;
         lastFireTime = 0f;
@@ -108,7 +108,7 @@ public class GunNormal : MonoBehaviour
             StartCoroutine(ShootEffect(hitPosition));
 
             currentAmmo--;
-            //uiManager.SetAmmoText(magAmmo, ammoRemain);
+            uiManager.SetAmmoText(currentAmmo, remainAmmo);
 
             if (currentAmmo == 0)
             {
@@ -156,7 +156,7 @@ public class GunNormal : MonoBehaviour
         currentAmmo += ammoToFill;
         remainAmmo -= ammoToFill;
 
-        //uiManager.SetAmmoText(magAmmo, ammoRemain);
+        uiManager.SetAmmoText(currentAmmo, remainAmmo);
 
         CurrentState = State.Ready;
     }

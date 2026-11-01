@@ -79,7 +79,7 @@ public class EnemySpawner : MonoBehaviour
             }
 
             spawnNumber++;
-            StartCoroutine(Spawn());
+            //StartCoroutine(Spawn());
         }
 
     }

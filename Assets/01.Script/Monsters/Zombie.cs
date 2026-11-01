@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using DG.Tweening;
+using DG.Tweening.Core.Easing;
 
 public class Zombie : LivingEntity
 {
@@ -43,6 +44,8 @@ public class Zombie : LivingEntity
     public static readonly int IdHasTarget = Animator.StringToHash("hasTarget");
     public static readonly int IdDie = Animator.StringToHash("isDead");
 
+    GameManager gameManager;
+    public int giveScore = 1;
 
     public Status CurrentStatus
     {
@@ -91,6 +94,10 @@ public class Zombie : LivingEntity
         agent = GetComponent<NavMeshAgent>();
         zombieAnimator = GetComponent<Animator>();
         zombieAudioSource = GetComponent<AudioSource>();
+
+        GameObject go = GameObject.FindWithTag("GameController");
+        gameManager = go.GetComponent<GameManager>();
+
         Setup();
     }
 
@@ -258,7 +265,7 @@ public class Zombie : LivingEntity
     public override void Die()
     {
         base.Die();
-
+        gameManager.ScoreUp(giveScore);
         CurrentStatus = Status.Die;
     }
 
